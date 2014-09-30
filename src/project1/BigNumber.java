@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class BigNumber {
 	
-	ArrayList <String> digits;
+	int[] digits;
 
 	/**
 	 * Constructor of the BigNumber class
@@ -41,6 +41,47 @@ public class BigNumber {
 //				
 //			}
 //		}
+	}
+	
+	public BigNumber multiply(BigNumber x){
+		BigNumber product = new BigNumber(0);
+		//TODO check this. might/probably is off by 1
+		//also starts at 1 to ignore sign digit...if we do that
+		for(int i,j=1;i<digits.length; i++,j++){
+			//keeps counter right for each 10's place
+			int count = x[i]*Math.pow(10, j);
+			while(count!=0){
+				product = product.add(digits);
+				count--;
+			}
+		}
+		return product;
+	}
+	
+	public BigNumber divide(BigNumber x){
+		BigNumber quotient = new BigNumber(0);
+		BigNumber temp = digits;
+		//TODO make sure compare to works this way
+		while (temp.compareTo(x)>=0){
+			temp=temp.subtract(x);
+			quotient=quotient.add(1);
+		}
+		//rest is remainder.
+		return quotient;
+	}
+	
+	public BigNumber mod(BigNumber x){
+		BigNumber temp = digits;
+		//TODO make sure compare to works this way
+		while (temp.compareTo(x)>=0){
+			temp=temp.subtract(x);
+		}
+		return temp;
+		
+	}
+	
+	public BigNumber factor(BigNumber x){
+		//TODO it.
 	}
 	
 	
